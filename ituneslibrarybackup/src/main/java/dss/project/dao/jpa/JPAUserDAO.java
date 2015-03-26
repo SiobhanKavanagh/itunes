@@ -1,5 +1,6 @@
 package dss.project.dao.jpa;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -28,6 +29,11 @@ public class JPAUserDAO implements UserDAO{
 		if(resultList.size() == 0)
 			return null;
 		return resultList.get(0);
+	}
+
+	@Override
+	public Collection<User> getAllUsers() {
+		return em.createNamedQuery("findAllUsers").getResultList();
 	}
 
 
