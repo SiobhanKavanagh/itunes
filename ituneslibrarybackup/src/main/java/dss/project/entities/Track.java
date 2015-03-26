@@ -27,7 +27,7 @@ public class Track {
 	private int trackPersistentId;
 	//FK of User
 	@Column(length = 32, name = "library_persistent_id_track")
-	private String library_persistent_id_track;
+	private String libraryPersistentIdTrack;
 	/**
 	 * No-args constructor used by the JPA.
 	 */
@@ -36,7 +36,7 @@ public class Track {
 	}
 	
 	public Track(int trackId, String trackName, String artist, String album,
-			String genre, int trackNumber, int trackPersistentId) {
+			String genre, int trackNumber, int trackPersistentId, String libraryPersistentIdTrack) {
 		this.trackId = trackId;
 		this.trackName = trackName;
 		this.artist = artist;
@@ -44,6 +44,7 @@ public class Track {
 		this.genre = genre;
 		this.trackNumber = trackNumber;
 		this.trackPersistentId = trackPersistentId;
+		this.libraryPersistentIdTrack = libraryPersistentIdTrack;
 	}
 
 	public int getTrackId() {

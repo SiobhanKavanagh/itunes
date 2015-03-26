@@ -24,7 +24,7 @@ public class Playlist {
 	private int playlistName;
 	//FK of User
 	@Column(length = 32, name = "library_persistent_id_playlist")
-	private String library_persistent_id_playlist;
+	private String libraryPersistentIdTrackPlaylist;
 	
 	//many to many relationship with track
 	@ManyToMany
@@ -40,10 +40,10 @@ public class Playlist {
 		
 	}
 		
-	public Playlist(int playlistId, String playlistPersistentId, Collection<Track> tracks) {
+	public Playlist(int playlistId, String playlistPersistentId, String libraryPersistentIdTrackPlaylist) {
 		this.playlistId = playlistId;
 		this.playlistPersistentId = playlistPersistentId;
-		this.tracks = tracks;
+		this.libraryPersistentIdTrackPlaylist =  libraryPersistentIdTrackPlaylist;
 	}
 
 	public int getPlaylistId() {

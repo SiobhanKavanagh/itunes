@@ -2,12 +2,16 @@ package dss.project.dao.jpa;
 
 import java.util.List;
 
+import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import dss.project.dao.UserDAO;
 import dss.project.entities.User;
 
+@Local
+@Stateless
 public class JPAUserDAO implements UserDAO{
 
 	@PersistenceContext
