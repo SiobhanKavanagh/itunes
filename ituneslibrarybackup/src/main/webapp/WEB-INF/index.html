@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Itunes Home</title>
+<form name="test">
+	<input type="hidden" name="test2">
+</form>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+	var locate = window.location;
+	document.test.test2.value = locate;
+	var text = document.test.test2.value;
+	
+	
+	//WINDOW CHANGING
+	function change(selection) {
+		//MANUAL IMPORT
+		if (selection == "import") {
+			var text = document.getElementById("jsChangeArea");
+			text.innerHTML = "";
+			text.innerHTML = "<form id='importForm' action='rest/restImportService/import' method='post' enctype='multipart/form-data'>\n\<b>Please choose a file to import</b><br><br>\
+											<input id='selectedFile' type='file' name='selectedFile' value='' /><br><br>\
+											<button type='submit' id='testButton' onclick='passFilePath()'>import</button>\
+										</form><hr>";
+		} 
+		
+</script>
+
+<style>
+table, th, td {
+	border: 1px solid black;
+	text-align: left;
+	vertical-align: top;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+}
+</style>
+</head>
+
+<body>
+	<table style="width: 100%; height: 98%; border: 1px;">
+		<tr>
+			<th id="header" colspan="3" style="height: 100px">header
+			</th>
+		</tr>
+		<tr>
+			<td rowspan="2" style="height: 400px; width: 140px;">
+			<!-- Please don't change how this is laid out at the minute, it's a pain to read through otherwise -->
+				<b>Admin:</b><br> 
+				<a id="importLink" href="#" onclick="change('import');return false;">Import Data</a><br> 
+			
+				<b>Backup Data:</b><br>
+				
+				</td>
+			<td id="jsChangeArea">JS changing area</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="height: 20px">footer</td>
+		</tr>
+	</table>
+</body>
+
+</html>
