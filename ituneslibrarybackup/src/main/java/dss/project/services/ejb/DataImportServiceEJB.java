@@ -18,15 +18,12 @@ import dss.project.services.DataImportService;
 @Path("/import")
 public class DataImportServiceEJB implements DataImportService {
 
-	public DataImportServiceEJB(){
-		importXML();
-	}
 	
-	public void importXML() {
+	public void importXML(File xmlFile) {
 		
 		  try {
 			  
-				File xmlFile = new File("C:\\Users\\Siobhan\\Desktop\\ItunesMusicLibrary1.xml");
+				xmlFile = new File("C:\\Users\\Siobhan\\Desktop\\ItunesMusicLibrary1.xml");
 				DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
                         .newDocumentBuilder();
 
@@ -90,9 +87,6 @@ public class DataImportServiceEJB implements DataImportService {
 		 
 	}
 
-//	public static void main(String [] args){
-//		new DataImportServiceEJB();
-//	}
 
 
 }
