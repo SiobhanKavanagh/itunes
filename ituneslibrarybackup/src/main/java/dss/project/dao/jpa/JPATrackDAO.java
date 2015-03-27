@@ -10,8 +10,7 @@ import javax.persistence.PersistenceContext;
 import dss.project.dao.TrackDAO;
 import dss.project.entities.Track;
 
-@Local
-@Stateless
+
 public class JPATrackDAO implements TrackDAO {
 
 	@PersistenceContext

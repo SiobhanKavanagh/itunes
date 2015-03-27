@@ -11,8 +11,7 @@ import javax.persistence.PersistenceContext;
 import dss.project.dao.UserDAO;
 import dss.project.entities.User;
 
-@Local
-@Stateless
+
 public class JPAUserDAO implements UserDAO{
 
 	@PersistenceContext

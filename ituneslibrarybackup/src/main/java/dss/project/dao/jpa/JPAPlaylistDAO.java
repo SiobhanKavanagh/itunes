@@ -10,8 +10,6 @@ import javax.persistence.PersistenceContext;
 import dss.project.dao.PlaylistDAO;
 import dss.project.entities.Playlist;
 
-@Local
-@Stateless
 public class JPAPlaylistDAO implements PlaylistDAO {
 
 	@PersistenceContext
