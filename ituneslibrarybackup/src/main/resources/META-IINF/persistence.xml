@@ -6,7 +6,7 @@
 	
 	<persistence-unit name="itunesBackup">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:/datasources/ITUNES_BACKUP</jta-data-source>
+		<jta-data-source>java:/datasources/itunes_backup</jta-data-source>
 		<class>dss.project.entities.Track</class>
 		<properties>
 		  
