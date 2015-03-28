@@ -3,6 +3,7 @@ package dss.project.services.ejb;
 import java.util.Collection;
 
 import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,6 +12,7 @@ import dss.project.dao.UserDAO;
 import dss.project.entities.User;
 import dss.project.services.UserService;
 
+@Stateless
 @Local
 public class UserServiceEJB implements UserService {
 
