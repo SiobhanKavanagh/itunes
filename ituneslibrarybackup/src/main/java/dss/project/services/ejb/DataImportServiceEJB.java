@@ -1,16 +1,22 @@
 package dss.project.services.ejb;
 
 import java.io.File;
+import java.io.InputStream;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
+import dss.project.dao.PlaylistDAO;
+import dss.project.dao.TrackDAO;
+import dss.project.dao.UserDAO;
 import dss.project.services.DataImportService;
 
 @Stateless
@@ -18,19 +24,27 @@ import dss.project.services.DataImportService;
 @Path("/import")
 public class DataImportServiceEJB implements DataImportService {
 
+	@Inject
+	private PlaylistDAO playlistDAO;
+	@Inject 
+	private TrackDAO trackDAO;
+	@Inject
+	private UserDAO userDAO;
 	
-	public void importXML(File xmlFile) {
+		
+	public void importXML(Document dom) {
+
 		
 		  try {
 			  
-				xmlFile = new File("C:\\Users\\Siobhan\\Desktop\\ItunesMusicLibrary1.xml");
+				dom = (Document) new File("C:\\Users\\Siobhan\\Desktop\\ItunesMusicLibrary1.xml");
 				DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
                         .newDocumentBuilder();
 
-				Document doc = dBuilder.parse(xmlFile);
+				Document doc = dBuilder.parse((InputStream) dom);
 
 				System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-			 
+				
 				if (doc.hasChildNodes()) {
 					 
 					printNote(doc.getChildNodes());
@@ -74,19 +88,23 @@ public class DataImportServiceEJB implements DataImportService {
 		 
 					// loop again if has child nodes
 					printNote(tempNode.getChildNodes());
-		 
+					
 				}
 		 
 				System.out.println("Node Name =" + tempNode.getNodeName() + " [CLOSE]");
 		 
+
+				
+				 
 			}
 		 
 		    }
-		 
+		
 		  
 		 
 	}
 
+	
 
 
 }
