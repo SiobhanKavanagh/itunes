@@ -16,7 +16,7 @@ public class Playlist {
 	
 	//PK playlist id
 	@Id
-	@Column(length = 32, name = "playlist_id")
+	@Column(length = 50, name = "playlist_id")
 	private int playlistId;
 	@Column(length = 32, name = "playlist_persistent_id")
 	private String playlistPersistentId;
