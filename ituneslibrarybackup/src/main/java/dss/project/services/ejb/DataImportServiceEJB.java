@@ -1,7 +1,8 @@
 package dss.project.services.ejb;
 
 import java.io.File;
-import java.io.InputStream;
+import java.util.Collection;
+
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -10,13 +11,16 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
 import dss.project.dao.PlaylistDAO;
 import dss.project.dao.TrackDAO;
 import dss.project.dao.UserDAO;
+import dss.project.entities.Playlist;
+import dss.project.entities.Track;
+import dss.project.entities.User;
 import dss.project.services.DataImportService;
 
 @Stateless
@@ -24,87 +28,144 @@ import dss.project.services.DataImportService;
 @Path("/import")
 public class DataImportServiceEJB implements DataImportService {
 
+	private static final String libraryPersistenceId = null;
 	@Inject
 	private PlaylistDAO playlistDAO;
 	@Inject 
 	private TrackDAO trackDAO;
 	@Inject
 	private UserDAO userDAO;
-	
-		
-	public void importXML(Document dom) {
 
-		
-		  try {
-			  
-				dom = (Document) new File("C:\\Users\\Siobhan\\Desktop\\ItunesMusicLibrary1.xml");
-				DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance()
-                        .newDocumentBuilder();
+	static File xmlFile;
 
-				Document doc = dBuilder.parse((InputStream) dom);
+	//add tracks
+	private Collection <Track> tracks;
+	//add playlists
+	private Collection <Playlist> playlists;
+	//add users
+	private Collection <User> users;
 
-				System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-				
-				if (doc.hasChildNodes()) {
-					 
-					printNote(doc.getChildNodes());
-			 
-				}
-			 
-		  
-			    } catch (Exception e) {
-				e.printStackTrace();
-			    }
-			  }
-			 
-	private static void printNote(NodeList nodeList) {
-		for (int count = 0; count < nodeList.getLength(); count++) {
-			 
-			Node tempNode = nodeList.item(count);
-		 
-			// make sure it's element node.
-			if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
-		 
-				// get node name and value
-				System.out.println("\nNode Name =" + tempNode.getNodeName() + " [OPEN]");
-				System.out.println("Node Value =" + tempNode.getTextContent());
-		 
-				if (tempNode.hasAttributes()) {
-		 
-					// get attributes names and values
-					NamedNodeMap nodeMap = tempNode.getAttributes();
-		 
-					for (int i = 0; i < nodeMap.getLength(); i++) {
-		 
-						Node node = nodeMap.item(i);
-						System.out.println("attr name : " + node.getNodeName());
-						System.out.println("attr value : " + node.getNodeValue());
-		 
+
+	public void importXML(File xmlFiles) {
+
+		try {
+			//file to import
+			File xmlFile = new File("C:\\Users\\Siobhan\\Desktop\\ItunesMusicLibrary1.xml");
+			//builds the xml file
+			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			//parses xml
+			Document doc = dBuilder.parse(xmlFile);
+			//normalises data
+			doc.getDocumentElement().normalize();
+
+			//TRACKS-------
+			//get all <dict> nodes 
+			NodeList dicts = doc.getElementsByTagName("dict");
+			//track id is first node
+			Node trackNode = dicts.item(1);
+			//cast node to element
+			Element trackElement = (Element) trackNode;
+			NodeList trackChild = trackElement.getElementsByTagName("dict");
+			
+
+			for (int i = 0; i < trackChild.getLength(); i++) {
+				Track t = new Track();
+
+				NodeList trackElements = trackChild.item(i).getChildNodes();
+				for (int j = 0; j < trackElements.getLength(); j++) {
+					if(trackElements.item(j).getTextContent().equals("Track ID")){
+						int trackId = Integer.parseInt(trackElements.item(j + 1).getTextContent());
+						t.setTrackId(trackId);
 					}
-		 
+					if(trackElements.item(j).getTextContent().equals("Name")){
+						String name = trackElements.item(j +1).getTextContent();
+						t.setTrackName(name);
+					}
+					if(trackElements.item(j).getTextContent().equals("Artist")){
+						String album = trackElements.item(j +1).getTextContent();
+						t.setAlbum(album);
+					}
+					if(trackElements.item(j).getTextContent().equals("Genre")){
+						String genre = trackElements.item(j +1).getTextContent();
+						t.setGenre(genre);
+					}
+					if(trackElements.item(j).getTextContent().equals("Track Number")){
+						int trackNumber = Integer.parseInt(trackElements.item(j +1).getTextContent());
+						t.setTrackNumber(trackNumber);
+					}
+					if(trackElements.item(j).getTextContent().equals("Persistent ID")){
+						String persistenceId = trackElements.item(j +1).getTextContent();
+						t.settrackPersistentId(persistenceId);
+					}
+					if(t.gettrackPersistentId() != null){
+						//add track to collection of tracks
+						tracks.add(t);
+					}
 				}
-		 
-				if (tempNode.hasChildNodes()) {
-		 
-					// loop again if has child nodes
-					printNote(tempNode.getChildNodes());
+
+			}
+			
+			//PLAYLISTS--------------
+			//find all <array> nodes
+			NodeList arrays = doc.getElementsByTagName("array");
+			//playlist name is first node
+			Node playlistNode = dicts.item(1);
+			Element playlistElement = (Element) playlistNode;
+			NodeList playlistChild = playlistElement.getElementsByTagName("array");
+			
+			for (int i = 0; i < playlistChild.getLength(); i++) {
+				Playlist p = new Playlist();
+				
+				NodeList playlistElements = playlistChild.item(i).getChildNodes();
+				for (int j = 0; j < playlistElements.getLength(); j++) {
+					if(playlistElements.item(j).getTextContent().equals("Playlist ID")){
+						int playlistId = Integer.parseInt(playlistElements.item(j + 1).getTextContent());
+						p.setPlaylistId(playlistId);
+						}
+					if(playlistElements.item(j).getTextContent().equals("Playlist Persistent ID")){
+						String playlistPId = playlistElements.item(j + 1).getTextContent();
+						p.setplaylistPersistentId(playlistPId);						
+					}
+					if(playlistElements.item(j).getTextContent().equals("NAME")){
+						String playlistName = playlistElements.item(j + 1).getTextContent();
+						p.setplaylistPersistentId(playlistName);						
+					}
+					if(p.getPlaylistName() != null){
+						playlists.add(p);
+					}
+				}
+			}
+			
+			
+			
+			//USER----------
+			//need library persistence id
+			Node libraryPersistence = dicts.item(0);
+			NodeList lpChild = libraryPersistence.getChildNodes();
+			
+			for (int j = 0; j < lpChild.getLength(); j++) {
+				User u = new User();
+				if(lpChild.item(j).getTextContent().equals("Library Persistent ID")){
+					String libraryPersistentId = lpChild.item(j+1).getTextContent();
+					u.setLibraryPersistentId(libraryPersistentId);
+				}
+				if(libraryPersistenceId != null){
+					users.add(u);
 					
 				}
-		 
-				System.out.println("Node Name =" + tempNode.getNodeName() + " [CLOSE]");
-		 
 
-				
-				 
 			}
-		 
-		    }
-		
-		  
-		 
+			
+			//users.add(tracks);
+			//users.addAll(playlists);
+			
+			userDAO.addUser(users);
+
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	
-
 
 }

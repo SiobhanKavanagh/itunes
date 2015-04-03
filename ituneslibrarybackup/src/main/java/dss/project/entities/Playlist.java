@@ -21,7 +21,7 @@ public class Playlist {
 	@Column(length = 32, name = "playlist_persistent_id")
 	private String playlistPersistentId;
 	@Column(length = 32, name = "playlist_name")
-	private int playlistName;
+	private String playlistName;
 	//FK of User
 	@Column(length = 32, name = "library_persistent_id_playlist")
 	private String libraryPersistentIdTrackPlaylist;
@@ -62,11 +62,11 @@ public class Playlist {
 		this.playlistPersistentId = playlistPersistentId;
 	}
 	
-	public int getPlaylistName() {
+	public String getPlaylistName() {
 		return playlistName;
 	}
 
-	public void setPlaylistName(int playlistName) {
+	public void setPlaylistName(String playlistName) {
 		this.playlistName = playlistName;
 	}
 

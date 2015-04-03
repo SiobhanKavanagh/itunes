@@ -24,7 +24,7 @@ public class Track {
 	@Column(length = 32, name = "track_number")
 	private int trackNumber;
 	@Column(length = 32, name = "track_persistent_id")
-	private int trackPersistentId;
+	private String trackPersistentId;
 	//FK of User
 	@Column(length = 32, name = "library_persistent_id_track")
 	private String libraryPersistentIdTrack;
@@ -36,7 +36,7 @@ public class Track {
 	}
 	
 	public Track(int trackId, String trackName, String artist, String album,
-			String genre, int trackNumber, int trackPersistentId, String libraryPersistentIdTrack) {
+			String genre, int trackNumber, String trackPersistentId, String libraryPersistentIdTrack) {
 		this.trackId = trackId;
 		this.trackName = trackName;
 		this.artist = artist;
@@ -95,11 +95,11 @@ public class Track {
 		this.trackNumber = trackNumber;
 	}
 	
-	public int gettrackPersistentId() {
+	public String gettrackPersistentId() {
 		return trackPersistentId;
 	}
 	
-	public void settrackPersistentId(int trackPersistentId) {
+	public void settrackPersistentId(String trackPersistentId) {
 		this.trackPersistentId = trackPersistentId;
 	}
 

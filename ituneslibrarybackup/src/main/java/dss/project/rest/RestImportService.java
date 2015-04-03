@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,25 +15,17 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+
+
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-
-import dss.project.services.DataImportService;
-
 
 @Path("/restImportService")
 public class RestImportService {
 	
 	DocumentBuilder documentBuilder;
 	Document dom;
-	
-
-	//@EJB
-	//private UserService userServiceEJB;
-
-	@Inject
-	private DataImportService dataImport;
 
 	@POST
 	@Path("/import")
@@ -67,8 +58,7 @@ public class RestImportService {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			documentBuilder = dbf.newDocumentBuilder();
 			dom = documentBuilder.parse(path);
-			dataImport.importXML(dom);
-			resultString = "Successful!!! :D";
+			resultString = "Success";
 					
 			
 		}

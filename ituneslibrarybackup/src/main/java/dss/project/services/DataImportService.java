@@ -1,12 +1,12 @@
 package dss.project.services;
 
 
-import javax.ejb.Local;
+import java.io.File;
 
-import org.w3c.dom.Document;
+import javax.ejb.Local;
 
 @Local
 public interface DataImportService {
 
-	public void importXML(Document dom);
+	public void importXML(File file);
 }

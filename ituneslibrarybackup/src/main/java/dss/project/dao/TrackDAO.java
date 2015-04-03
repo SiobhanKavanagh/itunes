@@ -10,7 +10,7 @@ public interface TrackDAO {
 	public Collection <Track> getAllTracks();
 	
 	public Track getTrack(int trackId, String trackName, String artist, String album,
-			String genre, int trackNumber, int trackPersistentId, String libraryPersistentIdTrack);
+			String genre, int trackNumber, String trackPersistentId, String libraryPersistentIdTrack);
 	
 	public void insertTrack(Track track);
 	
