@@ -8,12 +8,15 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+
+
+
 
 
 
@@ -21,11 +24,16 @@ import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import dss.project.services.ejb.DataImportServiceEJB;
+
 @Path("/restImportService")
 public class RestImportService {
 	
 	DocumentBuilder documentBuilder;
 	Document dom;
+	
+	@EJB
+	DataImportServiceEJB importService;
 
 	@POST
 	@Path("/import")
@@ -33,33 +41,21 @@ public class RestImportService {
 	public String importUploadedFile(@MultipartForm FileUploadForm form) throws SAXException, ParserConfigurationException {
 		String resultString = "";
 		try {
-			File wb = File.createTempFile("xmlFile", ".xml");
-			ByteArrayInputStream byteStreamFromUpload = new ByteArrayInputStream(form.getFileData());
-			FileOutputStream fileOutputStreamFromByteStream = new FileOutputStream(wb);
-			OutputStreamWriter encodedOutputStream = new OutputStreamWriter(fileOutputStreamFromByteStream, "UTF-8");
-			Writer writerToCreatedFile = new BufferedWriter(encodedOutputStream);
+			ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(form.getFileData());
+
+			File newFile = new File("tempData");
 			
-			while (true){
-				int byteStreamValue = byteStreamFromUpload.read();
-				
-				if(byteStreamValue != -1){
-					writerToCreatedFile.write(byteStreamValue);
-				}else{
-					writerToCreatedFile.close();
-					break;
-				}
+			Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newFile), "UTF-8"));
+			int data;
+			while ((data = byteArrayInputStream.read()) != -1) {
+				out.write(data);
 			}
-			
-			System.out.println("Temp file name:" +wb.getName());
-			String path = wb.getCanonicalPath();
-			
-			
-			
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			documentBuilder = dbf.newDocumentBuilder();
-			dom = documentBuilder.parse(path);
-			resultString = "Success";
-					
+			out.close();
+
+			if (importService == null)
+				System.out.println("no file");
+			importService.importXML(newFile);
+				
 			
 		}
 		catch (IOException e) {

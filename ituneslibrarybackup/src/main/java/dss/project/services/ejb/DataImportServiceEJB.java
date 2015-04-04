@@ -39,7 +39,7 @@ public class DataImportServiceEJB implements DataImportService {
 	static File xmlFile;
 
 	//add tracks
-	private Collection <Track> tracks;
+	private Collection<Track> tracks;
 	//add playlists
 	private Collection <Playlist> playlists;
 	//add users
@@ -109,7 +109,7 @@ public class DataImportServiceEJB implements DataImportService {
 			//find all <array> nodes
 			NodeList arrays = doc.getElementsByTagName("array");
 			//playlist name is first node
-			Node playlistNode = dicts.item(1);
+			Node playlistNode = arrays.item(1);
 			Element playlistElement = (Element) playlistNode;
 			NodeList playlistChild = playlistElement.getElementsByTagName("array");
 			
@@ -159,7 +159,10 @@ public class DataImportServiceEJB implements DataImportService {
 			//users.add(tracks);
 			//users.addAll(playlists);
 			
+			users.add((User) tracks);
+			users.add((User) playlists);
 			userDAO.addUser(users);
+			
 
 		}catch (Exception e) {
 			e.printStackTrace();
