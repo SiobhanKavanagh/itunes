@@ -19,9 +19,12 @@ public class User {
 	private String libraryPersistentId;
 	@Column(length = 32)
 	private String username;
-	@Column(length = 32)
+	@Column(length = 64)
 	private String password;
-	
+	@Column(length = 32)
+	private String role = "user";
+
+
 	//relationship with tracks
 	@OneToMany
 	@JoinColumn(name = "library_persistent_id_track", referencedColumnName = "library_persistent_id_user")
@@ -71,7 +74,9 @@ public class User {
 	}
 	
 
-	
+	public String getRole() {
+		return role;
+	}
 
 	
 	

@@ -3,56 +3,8 @@
 
 <head>
 <title>Itunes Home</title>
-<form name="test">
-	<input type="hidden" name="test2">
-</form>
 
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript">
-	var locate = window.location;
-	document.test.test2.value = locate;
-	var text = document.test.test2.value;
-	
-	function addNewUser() {
-		var url = 'rest/add/user';
-		
-		if($("#username").val().length == 0){
-			alert("The username field can't be null");
-			return;
-		}
-		if($("#password").val().length == 0){
-			alert("The password field can't be null");
-			return;
-		}
-
-		$.ajax({
-			url : url,
-			type : 'POST',
-			contentType : 'application/json',
-			dataType : "json",
-			data : JSON.stringify({
-				"username" : $("#username").val(),
-				"password" : $("#password").val(),
-				
-			}),
-			success : function(data) {
-				var message = "User '" + data.username + "' has been added.";
-				alert(message);
-				
-				$("#username").val("");
-				$("#password").val("");
-			},
-		    error: function(data) {
-		    	alert("Failed to add user - username '" + $("#username").val() + "' has already been taken.");
-		    }
-		});
-	}
-	
-	
-	
-		
-</script>
+ 
 
 <style>
 table, th, td {
@@ -71,20 +23,14 @@ html, body {
 <body>
 	<table style="width: 100%; height: 98%; border: 1px;">
 		<tr>
-			<th id="header" colspan="3" style="height: 100px">header
-			</th>
+			<th id="header" colspan="3" style="height: 100px">Welcome</th>
 		</tr>
 		<tr>
 			<td rowspan="2" style="height: 400px; width: 140px;">
-			
-				<b>Backup Data:</b><br>
-				
-				</td>
+			<div> <a href="register.html" >New Account</a> </div>
 			<td id="mainArea">JS changing area</td>
 		</tr>
-		<tr>
-			<td colspan="3" style="height: 20px">footer</td>
-		</tr>
+		
 	</table>
 </body>
 

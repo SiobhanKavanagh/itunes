@@ -15,8 +15,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
-import dss.project.dao.PlaylistDAO;
-import dss.project.dao.TrackDAO;
 import dss.project.dao.UserDAO;
 import dss.project.entities.Playlist;
 import dss.project.entities.Track;
@@ -29,10 +27,10 @@ import dss.project.services.DataImportService;
 public class DataImportServiceEJB implements DataImportService {
 
 	private static final String libraryPersistenceId = null;
-	@Inject
-	private PlaylistDAO playlistDAO;
-	@Inject 
-	private TrackDAO trackDAO;
+//	@Inject
+//	private PlaylistDAO playlistDAO;
+//	@Inject 
+//	private TrackDAO trackDAO;
 	@Inject
 	private UserDAO userDAO;
 
@@ -46,11 +44,11 @@ public class DataImportServiceEJB implements DataImportService {
 	private Collection <User> users;
 
 
-	public void importXML(File xmlFiles) {
+	public void importXML(String xmlFiles) {
 
 		try {
 			//file to import
-			File xmlFile = new File("C:\\Users\\Siobhan\\Desktop\\ItunesMusicLibrary1.xml");
+			File xmlFile = new File(xmlFiles);
 			//builds the xml file
 			DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			//parses xml

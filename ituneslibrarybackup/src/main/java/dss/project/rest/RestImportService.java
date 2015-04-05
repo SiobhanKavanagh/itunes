@@ -44,6 +44,7 @@ public class RestImportService {
 			ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(form.getFileData());
 
 			File newFile = new File("tempData");
+			String filepath = newFile.getAbsolutePath();
 			
 			Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newFile), "UTF-8"));
 			int data;
@@ -53,13 +54,11 @@ public class RestImportService {
 			out.close();
 
 			if (importService == null)
-				System.out.println("no file");
-			importService.importXML(newFile);
-				
-			
+				System.out.println("no filepath");
+			importService.importXML(filepath);
 		}
 		catch (IOException e) {
-			resultString = "Import was unsuccessful";
+			resultString = "Import did not complete";
 			e.printStackTrace();
 		}
 		return resultString;

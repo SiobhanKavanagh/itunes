@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registration</title>
+</head>
+<body>
+	<form id='registrationForm' action='register' method='post' enctype='multipart/form-data'>
+		<p>Please register</p>
+		<label for="username">Username:</label> 
+			<input id="username" autofocus="autofocus" placeholder="user name" required="required" type="text" name="username"/> 
+		<label for="password">Password:</label>
+			<input id="password" placeholder="password" required="required" type="password" name="password"/>
+		<label for="import">Library:</label>
+			<input id='import' type='file' name='importFile' value=''/>
+		<button type="submit">Register</button>
+	</form>
+</body>
+</html>
