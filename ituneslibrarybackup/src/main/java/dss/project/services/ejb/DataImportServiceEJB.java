@@ -34,7 +34,6 @@ public class DataImportServiceEJB implements DataImportService {
 	@Inject
 	private UserDAO userDAO;
 
-	static File xmlFile;
 
 	//add tracks
 	private Collection<Track> tracks;

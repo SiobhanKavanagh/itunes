@@ -12,7 +12,6 @@ import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 
 
@@ -20,48 +19,44 @@ import javax.xml.parsers.ParserConfigurationException;
 
 
 
+
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import dss.project.services.ejb.DataImportServiceEJB;
+import dss.project.services.DataImportService;
 
-@Path("/restImportService")
+@Path("/register")
 public class RestImportService {
 	
-	DocumentBuilder documentBuilder;
-	Document dom;
-	
 	@EJB
-	DataImportServiceEJB importService;
+	DataImportService importService;
 
 	@POST
-	@Path("/import")
 	@Consumes("multipart/form-data")
 	public String importUploadedFile(@MultipartForm FileUploadForm form) throws SAXException, ParserConfigurationException {
-		String resultString = "";
+		String result = "";
 		try {
 			ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(form.getFileData());
 
 			File newFile = new File("tempData");
 			String filepath = newFile.getAbsolutePath();
 			
-			Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newFile), "UTF-8"));
+			Writer output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newFile), "UTF-8"));
 			int data;
 			while ((data = byteArrayInputStream.read()) != -1) {
-				out.write(data);
+				output.write(data);
 			}
-			out.close();
+			output.close();
 
 			if (importService == null)
 				System.out.println("no filepath");
 			importService.importXML(filepath);
 		}
 		catch (IOException e) {
-			resultString = "Import did not complete";
+			result = "Import did not complete";
 			e.printStackTrace();
 		}
-		return resultString;
+		return result;
 	}
 
 }
