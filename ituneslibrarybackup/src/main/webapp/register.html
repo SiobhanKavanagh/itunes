@@ -3,9 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Registration</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+function registerUser(username, password, import){
+	var user = new User($("#username"), $("#password"), $("import"));
+	
+	$.ajax({
+		type : 'POST',
+		url : 'ituneslibrarybackup/register',
+		data : JSON.stringify(user),
+		success : handlePost,
+		contentType : 'application/json'
+			data : JSON.stringify({
+				"import" : $("#import").val(),
+			}),
+	});
+}
+	
+}
+function handlePost() {
+	alert("successfully added a new user");
+}
+
+</script>
 </head>
 <body>
-	<form id='registrationForm' action='register' method='post' enctype='multipart/form-data'>
+	<form id='registrationForm' action="registerUser()" method='POST' enctype='multipart/form-data'>
 		<p>Please register</p>
 		<label for="username">Username:</label> 
 			<input id="username" autofocus="autofocus" placeholder="user name" required="required" type="text" name="username"/> 
@@ -13,7 +36,7 @@
 			<input id="password" placeholder="password" required="required" type="password" name="password"/>
 		<label for="import">Library:</label>
 			<input id='import' type='file' name='importFile' value=''/>
-		<button type="submit">Register</button>
+		<button type='submit'>Register</button>
 	</form>
 </body>
 </html>
