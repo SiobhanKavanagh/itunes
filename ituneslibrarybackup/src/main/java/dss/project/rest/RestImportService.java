@@ -8,11 +8,12 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.xml.parsers.ParserConfigurationException;
+
 
 
 
@@ -28,7 +29,7 @@ import dss.project.services.DataImportService;
 @Path("/register")
 public class RestImportService {
 	
-	@EJB
+	@Inject
 	DataImportService importService;
 
 	@POST

@@ -33,5 +33,10 @@ public class JPAUserDAO implements UserDAO{
 		em.persist(users);
 	}
 
+	@Override
+	public void addUser(User user) {
+		em.persist(user);
+	}
+
 
 }

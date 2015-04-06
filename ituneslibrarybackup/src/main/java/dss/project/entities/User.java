@@ -78,6 +78,12 @@ public class User {
 		return role;
 	}
 
-	
-	
+	public void setTracks(Collection<Track> tracks) {
+		this.tracks = tracks;
+	}
+
+	public void setPlaylists(Collection<Playlist> playlists) {
+		this.playlists = playlists;
+	}
+		
 }
