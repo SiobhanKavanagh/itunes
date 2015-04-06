@@ -26,9 +26,11 @@ public class JPAPlaylistDAO implements PlaylistDAO {
 	}
 
 	@Override
-	public void batchInsertPlaylists(Collection<Playlist> playlistList) {
-		for(Playlist playlist: playlistList)
-			em.persist(playlist);
+	public void batchInsertPlaylists(Collection<Playlist> playlists) {
+		// TODO Auto-generated method stub
+		
 	}
+
+	
 
 }

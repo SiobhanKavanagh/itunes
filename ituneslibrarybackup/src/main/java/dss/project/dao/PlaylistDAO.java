@@ -10,5 +10,7 @@ public interface PlaylistDAO {
 	
 	public Playlist getPlaylist(int playlistId, String playlistPersistentId, String libraryPersistentIdTrackPlaylist);
 
-	public void batchInsertPlaylists(Collection <Playlist> playlistList);
+	public void batchInsertPlaylists(Collection<Playlist> playlists);
+
+	
 }

@@ -29,8 +29,8 @@ public class DataImportServiceEJB implements DataImportService {
 
 	private static final String libraryPersistenceId = null;
 
+	@Inject
 	private UserDAO userDAO;
-
 
 	//add tracks
 	private Collection<Track> tracks = new ArrayList<>();
@@ -101,6 +101,7 @@ public class DataImportServiceEJB implements DataImportService {
 					if(t.gettrackPersistentId() != null){
 						//add track to collection of tracks
 						tracks.add(t);
+						System.out.println("added tracks");
 					}
 				}
 
@@ -123,25 +124,45 @@ public class DataImportServiceEJB implements DataImportService {
 						//System.out.println(playlistElements.item(j + 1).getTextContent());
 						int playlistId = Integer.parseInt(playlistElements.item(j + 1).getTextContent());
 						p.setPlaylistId(playlistId);
-						System.out.println("playlist id" + playlistId);
+						//System.out.println("playlist id" + playlistId);
 					}
 					if(playlistElements.item(j).getTextContent().equals("Playlist Persistent ID")){
 						String playlistPId = playlistElements.item(j + 1).getTextContent();
 						p.setplaylistPersistentId(playlistPId);	
-						System.out.println("playlist persistent id" + playlistPId);
+						//System.out.println("playlist persistent id" + playlistPId);
 					}
 					if(playlistElements.item(j).getTextContent().equals("Name")){
 						String playlistName = playlistElements.item(j + 1).getTextContent();
-						p.setplaylistPersistentId(playlistName);		
-						System.out.println("playlist name" + playlistName);
+						p.setPlaylistName(playlistName);		
+						//System.out.println("playlist name" + playlistName);
 					}
-					
-					
+					if(playlistElements.item(j).getTextContent().equals("Track ID")){
+						//new collection of tracks
+						Collection<Track> playlistTracks = new ArrayList<Track>();
+						String trackID = playlistElements.item(j+1).getTextContent();
+						int id = Integer.parseInt(trackID);
+						//System.out.println(trackID);
+						for (Track track : tracks) {
+							//if id is a track already saved
+							if(track.getTrackId() == id){
+								//System.out.println("yes");
+								playlistTracks.add(new Track(id, track.getTrackName(), track.getArtist(), track.getAlbum(), track.getGenre(), track.getTrackNumber(), track.gettrackPersistentId(), user.getLibraryPersistentId()));
+								//add collection to playlist
+								p.setTracks(playlistTracks);
+								}
+							
+							}
+						}
 					if(p.getPlaylistName() != null){
 						playlists.add(p);
+						System.out.println("added playlists");
 					}
-				}
+
+					
+					}
+
 			}
+			
 			//USER----------
 			//need library persistence id
 			Node libraryPersistence = dicts.item(0);
@@ -151,14 +172,16 @@ public class DataImportServiceEJB implements DataImportService {
 
 				if(lpChild.item(j).getTextContent().equals("Library Persistent ID")){
 					String libraryPersistentId = lpChild.item(j+1).getTextContent();
+
 					user.setLibraryPersistentId(libraryPersistentId);
 					//System.out.println(libraryPersistentId);
 				}
-				if(libraryPersistenceId != null){
+				if(user.getLibraryPersistentId() != null){
 
 					user.setTracks(tracks);
 					user.setPlaylists(playlists);
-					userDAO.addUser(user);
+					userDAO.insertUser(user);
+					System.out.println("done");
 				}
 			}
 

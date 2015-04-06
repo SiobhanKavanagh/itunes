@@ -19,7 +19,6 @@ public class JPATrackDAO implements TrackDAO {
 		return em.createNamedQuery("findAllTracks").getResultList();
 	}
 
-
 //insert new track
 	@Override
 	public void insertTrack(Track track) {

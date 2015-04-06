@@ -3,13 +3,16 @@ package dss.project.dao.jpa;
 import java.util.Collection;
 import java.util.List;
 
+import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import dss.project.dao.UserDAO;
 import dss.project.entities.User;
 
-
+@Local
+@Stateless
 public class JPAUserDAO implements UserDAO{
 
 	@PersistenceContext
@@ -28,13 +31,7 @@ public class JPAUserDAO implements UserDAO{
 		return em.createNamedQuery("findAllUsers").getResultList();
 	}
 
-	@Override
-	public void addUser(Collection<User> users) {
-		em.persist(users);
-	}
-
-	@Override
-	public void addUser(User user) {
+	public void insertUser(User user) {
 		em.persist(user);
 	}
 
