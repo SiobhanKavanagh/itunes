@@ -31,9 +31,10 @@ public class JPAUserDAO implements UserDAO{
 		return em.createNamedQuery("findAllUsers").getResultList();
 	}
 
+	@Override
 	public void insertUser(User user) {
 		em.persist(user);
 	}
-
+	
 
 }

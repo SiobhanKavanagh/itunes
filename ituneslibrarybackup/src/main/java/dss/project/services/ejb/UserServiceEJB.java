@@ -12,7 +12,8 @@ import dss.project.dao.UserDAO;
 import dss.project.entities.User;
 import dss.project.services.UserService;
 
-
+@Local
+@Stateless
 public class UserServiceEJB implements UserService {
 
 	@PersistenceContext
@@ -27,9 +28,9 @@ public class UserServiceEJB implements UserService {
 	}
 
 	@Override
-	public void addUser(User user) {
+	public void insertUser(User user) {
 		dao.insertUser(user);
 	}
-
+ 	
 
 }

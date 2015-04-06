@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import dss.project.dao.PlaylistDAO;
 import dss.project.entities.Playlist;
+import dss.project.entities.Track;
 
 public class JPAPlaylistDAO implements PlaylistDAO {
 
@@ -26,10 +27,13 @@ public class JPAPlaylistDAO implements PlaylistDAO {
 	}
 
 	@Override
-	public void batchInsertPlaylists(Collection<Playlist> playlists) {
-		// TODO Auto-generated method stub
-		
+	public void batchInsertPlaylists(Collection<Playlist> playlistList) {
+		for (Playlist playlist : playlistList) {
+			em.persist(playlist);
+		}
 	}
+
+	
 
 	
 

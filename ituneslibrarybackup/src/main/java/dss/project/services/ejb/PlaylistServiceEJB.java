@@ -30,9 +30,8 @@ public class PlaylistServiceEJB implements PlaylistService {
 	@Override
 	public void addPlaylists(Collection<Playlist> playlists) {
 		dao.batchInsertPlaylists(playlists);
-		
 	}
-	
+
 	
 
 }

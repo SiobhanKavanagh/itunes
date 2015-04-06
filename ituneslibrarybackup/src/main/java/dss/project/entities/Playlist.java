@@ -17,7 +17,7 @@ public class Playlist {
 	//PK playlist id
 	@Id
 	@Column(length = 50, name = "playlist_id")
-	private int playlistId;
+	private Integer playlistId;
 	@Column(length = 32, name = "playlist_persistent_id")
 	private String playlistPersistentId;
 	@Column(length = 32, name = "playlist_name")
@@ -40,17 +40,17 @@ public class Playlist {
 		
 	}
 		
-	public Playlist(int playlistId, String playlistPersistentId, String libraryPersistentIdTrackPlaylist) {
+	public Playlist(Integer playlistId, String playlistPersistentId, String libraryPersistentIdTrackPlaylist) {
 		this.playlistId = playlistId;
 		this.playlistPersistentId = playlistPersistentId;
 		this.libraryPersistentIdTrackPlaylist =  libraryPersistentIdTrackPlaylist;
 	}
 
-	public int getPlaylistId() {
+	public Integer getPlaylistId() {
 		return playlistId;
 	}
 	
-	public void setPlaylistId(int playlistId) {
+	public void setPlaylistId(Integer playlistId) {
 		this.playlistId = playlistId;
 	}
 	

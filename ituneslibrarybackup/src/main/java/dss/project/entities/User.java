@@ -15,7 +15,7 @@ public class User {
 
 	//PK library Persistent ID
 	@Id
-	@Column(length =32, name = "library_persistent_id_user")
+	@Column(name = "library_persistent_id_user")
 	private String libraryPersistentId;
 	@Column(length = 32)
 	private String username;

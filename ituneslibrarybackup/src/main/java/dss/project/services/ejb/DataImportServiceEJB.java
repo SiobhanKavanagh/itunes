@@ -16,6 +16,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
+import dss.project.dao.PlaylistDAO;
+import dss.project.dao.TrackDAO;
 import dss.project.dao.UserDAO;
 import dss.project.entities.Playlist;
 import dss.project.entities.Track;
@@ -31,6 +33,10 @@ public class DataImportServiceEJB implements DataImportService {
 
 	@Inject
 	private UserDAO userDAO;
+	@Inject
+	private TrackDAO trackDAO;
+	@Inject
+	private PlaylistDAO playlistDAO;
 
 	//add tracks
 	private Collection<Track> tracks = new ArrayList<>();
@@ -102,6 +108,7 @@ public class DataImportServiceEJB implements DataImportService {
 						//add track to collection of tracks
 						tracks.add(t);
 						System.out.println("added tracks");
+						trackDAO.batchInsertTracks(tracks);
 					}
 				}
 
@@ -149,6 +156,7 @@ public class DataImportServiceEJB implements DataImportService {
 								playlistTracks.add(new Track(id, track.getTrackName(), track.getArtist(), track.getAlbum(), track.getGenre(), track.getTrackNumber(), track.gettrackPersistentId(), user.getLibraryPersistentId()));
 								//add collection to playlist
 								p.setTracks(playlistTracks);
+								playlistDAO.batchInsertPlaylists(playlists);
 								}
 							
 							}
@@ -175,11 +183,13 @@ public class DataImportServiceEJB implements DataImportService {
 
 					user.setLibraryPersistentId(libraryPersistentId);
 					//System.out.println(libraryPersistentId);
+					//user.setPassword("password");
+					//user.setUsername("username");
 				}
 				if(user.getLibraryPersistentId() != null){
 
-					user.setTracks(tracks);
-					user.setPlaylists(playlists);
+					//user.setTracks(tracks);
+					//user.setPlaylists(playlists);
 					userDAO.insertUser(user);
 					System.out.println("done");
 				}

@@ -30,6 +30,9 @@ public class TrackServiceEJB implements TrackService {
 	@Override
 	public void addTracks(Collection<Track> tracks) {
 		dao.batchInsertTracks(tracks);
+		
 	}
+
+	
 
 }

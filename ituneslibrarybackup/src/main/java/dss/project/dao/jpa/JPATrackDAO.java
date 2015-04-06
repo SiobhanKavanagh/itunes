@@ -25,12 +25,7 @@ public class JPATrackDAO implements TrackDAO {
 		em.persist(track);
 		
 	}
-//batch insert track
-	@Override
-	public void batchInsertTracks(Collection<Track> trackList) {
-		for(Track track: trackList)
-			em.persist(track);
-	}
+
 
 	@Override
 	public Track getTrack(int trackId, String trackName, String artist,
@@ -39,6 +34,13 @@ public class JPATrackDAO implements TrackDAO {
 		return em.find(Track.class, new Track(trackId, trackName, artist,
 				album, genre, trackNumber, trackPersistentId,
 				libraryPersistentIdTrack));
+	}
+
+	@Override
+	public void batchInsertTracks(Collection <Track> trackList) {
+		for (Track track : trackList) {
+			em.persist(track);
+		}
 	}
 
 
