@@ -26,13 +26,11 @@ public class User {
 
 
 	//relationship with tracks
-	@OneToMany
-	@JoinColumn(name = "library_persistent_id_track", referencedColumnName = "library_persistent_id_user")
+	@OneToMany(mappedBy="user")
 	private Collection <Track> tracks;
 	
 	//relationship with playlists
-	@OneToMany
-	@JoinColumn(name = "library_persistent_id_user", referencedColumnName="library_persistent_id_user")
+	@OneToMany(mappedBy="user")
 	private Collection <Playlist> playlists;
 	
 

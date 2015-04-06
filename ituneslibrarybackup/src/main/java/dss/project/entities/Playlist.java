@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,14 +23,15 @@ public class Playlist {
 	private String playlistPersistentId;
 	@Column(length = 255, name = "playlist_name")
 	private String playlistName;
+	
 	//FK of User
-	@Column(name = "library_persistent_id_playlist")
-	private String libraryPersistentIdTrackPlaylist;
+	@ManyToOne
+	private User user;
 	
 	//many to many relationship with track
 	@ManyToMany
 	@JoinTable(name = "playlist_has_track", joinColumns = @JoinColumn(name = "playlist_id", referencedColumnName = "playlist_id"),
-			inverseJoinColumns= @JoinColumn(name = "track_id", referencedColumnName = "track_id"))
+		inverseJoinColumns= @JoinColumn(name = "track_id", referencedColumnName = "track_id"))
 	private Collection <Track> tracks;
 	
 	
@@ -40,10 +42,10 @@ public class Playlist {
 		
 	}
 		
-	public Playlist(Integer playlistId, String playlistPersistentId, String libraryPersistentIdTrackPlaylist) {
+	public Playlist(Integer playlistId, String playlistPersistentId, User user) {
 		this.playlistId = playlistId;
 		this.playlistPersistentId = playlistPersistentId;
-		this.libraryPersistentIdTrackPlaylist =  libraryPersistentIdTrackPlaylist;
+		this.user = user;
 	}
 
 	public Integer getPlaylistId() {
@@ -76,6 +78,14 @@ public class Playlist {
 	
 	public void setTracks(Collection<Track> tracks) {
 		this.tracks = tracks;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

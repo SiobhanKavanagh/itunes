@@ -31,9 +31,10 @@ public class JPATrackDAO implements TrackDAO {
 	public Track getTrack(int trackId, String trackName, String artist,
 			String album, String genre, int trackNumber, String trackPersistentId,
 			String libraryPersistentIdTrack) {
-		return em.find(Track.class, new Track(trackId, trackName, artist,
-				album, genre, trackNumber, trackPersistentId,
-				libraryPersistentIdTrack));
+		return em.find(Track.class, new Track(trackId/*, trackName, artist,
+//				album, genre, trackNumber, trackPersistentId,
+//				libraryPersistentIdTrack)*/
+		));
 	}
 
 	@Override

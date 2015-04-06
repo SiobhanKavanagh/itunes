@@ -1,8 +1,13 @@
 package dss.project.entities;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -26,19 +31,30 @@ public class Track {
 	private int trackNumber;
 	@Column(name = "track_persistent_id")
 	private String trackPersistentId;
-	//FK of User
 	
-	@Column(name = "library_persistent_id_track")
-	private String libraryPersistentIdTrack;
+	//FK of User
+	@ManyToOne
+	private User user;
+	
+	//many to many relationship with track
+		@ManyToMany
+		@JoinTable(name = "playlist_has_track", joinColumns = @JoinColumn(name = "track_id", referencedColumnName = "track_id"),
+			inverseJoinColumns = @JoinColumn(name = "playlist_id", referencedColumnName = "playlist_id"))
+		private Collection <Playlist> playlists;
+	
 	/**
 	 * No-args constructor used by the JPA.
 	 */
 	public Track(){
 		
 	}
+	public Track(Integer trackId)
+	{
+		this.trackId = trackId;
+	}
 	
 	public Track(Integer trackId, String trackName, String artist, String album,
-			String genre, int trackNumber, String trackPersistentId, String libraryPersistentIdTrack) {
+			String genre, int trackNumber, String trackPersistentId, User user) {
 		this.trackId = trackId;
 		this.trackName = trackName;
 		this.artist = artist;
@@ -46,7 +62,7 @@ public class Track {
 		this.genre = genre;
 		this.trackNumber = trackNumber;
 		this.trackPersistentId = trackPersistentId;
-		this.libraryPersistentIdTrack = libraryPersistentIdTrack;
+		this.user = user;
 	}
 
 	public Integer getTrackId() {
@@ -103,5 +119,13 @@ public class Track {
 	
 	public void settrackPersistentId(String trackPersistentId) {
 		this.trackPersistentId = trackPersistentId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

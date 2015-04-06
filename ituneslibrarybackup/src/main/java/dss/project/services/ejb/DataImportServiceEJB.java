@@ -29,8 +29,7 @@ import dss.project.services.DataImportService;
 @Path("/import")
 public class DataImportServiceEJB implements DataImportService {
 
-	private static final String libraryPersistenceId = null;
-
+	
 	@Inject
 	private UserDAO userDAO;
 	@Inject
@@ -110,8 +109,8 @@ public class DataImportServiceEJB implements DataImportService {
 						//System.out.println(name);
 					}
 					if(trackElements.item(j).getTextContent().equals("Artist")){
-						String album = trackElements.item(j +1).getTextContent();
-						t.setAlbum(album);
+						String artist = trackElements.item(j +1).getTextContent();
+						t.setArtist(artist);
 						//System.out.println(album);
 					}
 					if(trackElements.item(j).getTextContent().equals("Genre")){
@@ -179,7 +178,7 @@ public class DataImportServiceEJB implements DataImportService {
 							//if id is a track already saved
 							if(track.getTrackId() == id){
 								//System.out.println("yes");
-								playlistTracks.add(new Track(id, track.getTrackName(), track.getArtist(), track.getAlbum(), track.getGenre(), track.getTrackNumber(), track.gettrackPersistentId(), user.getLibraryPersistentId()));
+								playlistTracks.add(new Track(id, track.getTrackName(), track.getArtist(), track.getAlbum(), track.getGenre(), track.getTrackNumber(), track.gettrackPersistentId(), user));
 								//add collection to playlist
 								p.setTracks(playlistTracks);
 								
