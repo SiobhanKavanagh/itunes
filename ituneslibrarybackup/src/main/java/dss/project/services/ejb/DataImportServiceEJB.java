@@ -46,6 +46,13 @@ public class DataImportServiceEJB implements DataImportService {
 	User user = new User();
 
 
+	public void initialiseUser(String username, String password)
+	{
+		user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+	}
+	
 	public void importXML(String xmlFiles) {
 
 		try {
@@ -57,10 +64,28 @@ public class DataImportServiceEJB implements DataImportService {
 			Document doc = dBuilder.parse(xmlFile);
 			//normalises data
 			doc.getDocumentElement().normalize();
-
-			//TRACKS-------
+			
 			//get all <dict> nodes 
 			NodeList dicts = doc.getElementsByTagName("dict");
+
+			//USER----------
+			//need library persistence id
+			Node libraryPersistence = dicts.item(0);
+			NodeList lpChild = libraryPersistence.getChildNodes();
+
+			for (int j = 0; j < lpChild.getLength(); j++) {
+
+				if(lpChild.item(j).getTextContent().equals("Library Persistent ID")){
+					String libraryPersistentId = lpChild.item(j+1).getTextContent();
+
+					user.setLibraryPersistentId(libraryPersistentId);
+					//System.out.println(libraryPersistentId);
+					//user.setPassword("password");
+					//user.setUsername("username");
+				}
+			}
+			
+			//TRACKS-------
 			//track id is first node
 			Node trackNode = dicts.item(1);
 
@@ -105,13 +130,14 @@ public class DataImportServiceEJB implements DataImportService {
 						//System.out.println(persistenceId);
 					}
 					if(t.gettrackPersistentId() != null){
+						
 						//add track to collection of tracks
 						tracks.add(t);
-						System.out.println("added tracks");
-						trackDAO.batchInsertTracks(tracks);
+						//System.out.println("added tracks");
+//						trackDAO.batchInsertTracks(tracks);
 					}
 				}
-
+				trackDAO.batchInsertTracks(tracks);
 			}
 
 			//PLAYLISTS--------------
@@ -156,14 +182,15 @@ public class DataImportServiceEJB implements DataImportService {
 								playlistTracks.add(new Track(id, track.getTrackName(), track.getArtist(), track.getAlbum(), track.getGenre(), track.getTrackNumber(), track.gettrackPersistentId(), user.getLibraryPersistentId()));
 								//add collection to playlist
 								p.setTracks(playlistTracks);
-								playlistDAO.batchInsertPlaylists(playlists);
+								
 								}
 							
 							}
-						}
+						playlistDAO.batchInsertPlaylists(playlists);	
+					}
 					if(p.getPlaylistName() != null){
 						playlists.add(p);
-						System.out.println("added playlists");
+						//System.out.println("added playlists");
 					}
 
 					
@@ -171,21 +198,7 @@ public class DataImportServiceEJB implements DataImportService {
 
 			}
 			
-			//USER----------
-			//need library persistence id
-			Node libraryPersistence = dicts.item(0);
-			NodeList lpChild = libraryPersistence.getChildNodes();
-
-			for (int j = 0; j < lpChild.getLength(); j++) {
-
-				if(lpChild.item(j).getTextContent().equals("Library Persistent ID")){
-					String libraryPersistentId = lpChild.item(j+1).getTextContent();
-
-					user.setLibraryPersistentId(libraryPersistentId);
-					//System.out.println(libraryPersistentId);
-					//user.setPassword("password");
-					//user.setUsername("username");
-				}
+		
 				if(user.getLibraryPersistentId() != null){
 
 					//user.setTracks(tracks);
@@ -193,7 +206,7 @@ public class DataImportServiceEJB implements DataImportService {
 					userDAO.insertUser(user);
 					System.out.println("done");
 				}
-			}
+			
 
 		}catch (Exception e) {
 			e.printStackTrace();

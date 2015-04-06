@@ -3,8 +3,10 @@
 
 <head>
 <title>Itunes Home</title>
-
+<button type="button" onclick="window.location.replace('LogoutServlet')">Logout</button>
+ <script type="text/javascript">
  
+ </script>
 
 <style>
 table, th, td {
@@ -21,17 +23,11 @@ html, body {
 </head>
 
 <body>
-	<table style="width: 100%; height: 98%; border: 1px;">
-		<tr>
-			<th id="header" colspan="3" style="height: 100px">Welcome</th>
-		</tr>
-		<tr>
-			<td rowspan="2" style="height: 400px; width: 140px;">
-			<div> <a href="register.html" >Make new Account</a> </div>
-			<td id="mainArea"></td>
-		</tr>
+	
+			<div> <a href="register.html" id="makeAccount" >Make new Account</a> </div>
+			<div> <a href="viewTracks.html" >View Tracks</a></div>
+			
 		
-	</table>
 </body>
 
 </html>

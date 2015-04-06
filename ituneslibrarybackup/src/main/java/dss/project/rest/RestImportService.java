@@ -37,10 +37,13 @@ public class RestImportService {
 	public String importUploadedFile(@MultipartForm FileUploadForm form) throws SAXException, ParserConfigurationException {
 		String result = "";
 		try {
+			
 			ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(form.getFileData());
 
 			File newFile = new File("tempData");
 			String filepath = newFile.getAbsolutePath();
+			String username = form.getUsername();
+			String password = form.getPassword();
 			
 			Writer output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newFile), "UTF-8"));
 			int data;
@@ -51,7 +54,11 @@ public class RestImportService {
 			
 
 			if (importService == null)
+			{
 				System.out.println("no filepath");
+			}
+			
+			importService.initialiseUser(username, password);
 			importService.importXML(filepath);
 		}
 		catch (IOException e) {

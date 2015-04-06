@@ -16,14 +16,14 @@ public class Playlist {
 	
 	//PK playlist id
 	@Id
-	@Column(length = 50, name = "playlist_id")
+	@Column(length = 25, name = "playlist_id")
 	private Integer playlistId;
-	@Column(length = 32, name = "playlist_persistent_id")
+	@Column(name = "playlist_persistent_id")
 	private String playlistPersistentId;
-	@Column(length = 32, name = "playlist_name")
+	@Column(length = 255, name = "playlist_name")
 	private String playlistName;
 	//FK of User
-	@Column(length = 32, name = "library_persistent_id_playlist")
+	@Column(name = "library_persistent_id_playlist")
 	private String libraryPersistentIdTrackPlaylist;
 	
 	//many to many relationship with track

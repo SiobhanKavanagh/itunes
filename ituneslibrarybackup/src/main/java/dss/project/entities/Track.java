@@ -3,6 +3,7 @@ package dss.project.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -11,22 +12,23 @@ public class Track {
 	
 	//PK Track ID
 	@Id
-	@Column(length = 32, name = "track_id")
+	@Column(name = "track_id")
 	private Integer trackId;
 	@Column(name = "track_name")
 	private String trackName;
-	@Column(length = 32, name = "artist")
+	@Column(name = "artist")
 	private String artist;
-	@Column(length = 32, name = "album")
+	@Column(name = "album")
 	private String album;
-	@Column(length = 32, name = "genre")
+	@Column(name = "genre")
 	private String genre;
-	@Column(length = 32, name = "track_number")
+	@Column(name = "track_number")
 	private int trackNumber;
-	@Column(length = 32, name = "track_persistent_id")
+	@Column(name = "track_persistent_id")
 	private String trackPersistentId;
 	//FK of User
-	@Column(length = 32, name = "library_persistent_id_track")
+	
+	@Column(name = "library_persistent_id_track")
 	private String libraryPersistentIdTrack;
 	/**
 	 * No-args constructor used by the JPA.

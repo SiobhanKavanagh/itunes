@@ -7,4 +7,6 @@ import javax.ejb.Local;
 public interface DataImportService {
 
 	public void importXML(String file);
+	
+	public void initialiseUser(String username, String password);
 }

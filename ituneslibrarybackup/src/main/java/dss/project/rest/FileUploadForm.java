@@ -11,6 +11,8 @@ public class FileUploadForm {
 
 	private byte [] fileData;
 	private String fileName;
+	private String username;
+	private String password;
 
 	public String getFileName() {
 		return fileName;
@@ -29,6 +31,26 @@ public class FileUploadForm {
 	@PartType("application/octet-stream")
 	public void setFileData(byte [] fileData) {
 		this.fileData = fileData;
+	}
+
+	@FormParam("username")
+	@PartType("text/plain")
+	public void setUsername(String username){
+		this.username = username;
+	}
+	
+	@FormParam("password")
+	@PartType("text/plain")
+	public void setPassword(String password){
+		this.password = password;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 
 }
