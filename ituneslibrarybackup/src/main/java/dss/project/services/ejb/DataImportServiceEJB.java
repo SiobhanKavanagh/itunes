@@ -57,6 +57,7 @@ public class DataImportServiceEJB implements DataImportService {
 			NodeList dicts = doc.getElementsByTagName("dict");
 			//track id is first node
 			Node trackNode = dicts.item(1);
+
 			//cast node to element
 			Element trackElement = (Element) trackNode;
 			NodeList trackChild = trackElement.getElementsByTagName("dict");
@@ -109,9 +110,9 @@ public class DataImportServiceEJB implements DataImportService {
 			//find all <array> nodes
 			NodeList arrays = doc.getElementsByTagName("array");
 			//playlist name is first node
-			Node playlistNode = arrays.item(1);
+			Node playlistNode = arrays.item(0);
 			Element playlistElement = (Element) playlistNode;
-			NodeList playlistChild = playlistElement.getElementsByTagName("array");
+			NodeList playlistChild = playlistElement.getElementsByTagName("dict");
 
 			for (int i = 0; i < playlistChild.getLength(); i++) {
 				Playlist p = new Playlist();
@@ -119,19 +120,20 @@ public class DataImportServiceEJB implements DataImportService {
 				NodeList playlistElements = playlistChild.item(i).getChildNodes();
 				for (int j = 0; j < playlistElements.getLength(); j++) {
 					if(playlistElements.item(j).getTextContent().equals("Playlist ID")){
+						//System.out.println(playlistElements.item(j + 1).getTextContent());
 						int playlistId = Integer.parseInt(playlistElements.item(j + 1).getTextContent());
 						p.setPlaylistId(playlistId);
-						System.out.println(playlistId);
+						System.out.println("playlist id" + playlistId);
 					}
 					if(playlistElements.item(j).getTextContent().equals("Playlist Persistent ID")){
 						String playlistPId = playlistElements.item(j + 1).getTextContent();
 						p.setplaylistPersistentId(playlistPId);	
-						System.out.println(playlistPId);
+						System.out.println("playlist persistent id" + playlistPId);
 					}
 					if(playlistElements.item(j).getTextContent().equals("Name")){
 						String playlistName = playlistElements.item(j + 1).getTextContent();
 						p.setplaylistPersistentId(playlistName);		
-						System.out.println(playlistName);
+						System.out.println("playlist name" + playlistName);
 					}
 					
 					
@@ -140,9 +142,6 @@ public class DataImportServiceEJB implements DataImportService {
 					}
 				}
 			}
-
-
-
 			//USER----------
 			//need library persistence id
 			Node libraryPersistence = dicts.item(0);
@@ -167,4 +166,5 @@ public class DataImportServiceEJB implements DataImportService {
 			e.printStackTrace();
 		}
 	}
+
 }
