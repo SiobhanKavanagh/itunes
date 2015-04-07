@@ -23,13 +23,12 @@ import dss.project.entities.Playlist;
 import dss.project.entities.Track;
 import dss.project.entities.User;
 import dss.project.services.DataImportService;
+import dss.project.utils.PasswordGenerator;
 
 @Stateless
 @Local
 @Path("/import")
 public class DataImportServiceEJB implements DataImportService {
-
-	private static final String libraryPersistenceId = null;
 
 	@Inject
 	private UserDAO userDAO;
@@ -50,7 +49,8 @@ public class DataImportServiceEJB implements DataImportService {
 	{
 		user = new User();
 		user.setUsername(username);
-		user.setPassword(password);
+		user.setPassword(PasswordGenerator.generate(password));
+
 	}
 	
 	public void importXML(String xmlFiles) {

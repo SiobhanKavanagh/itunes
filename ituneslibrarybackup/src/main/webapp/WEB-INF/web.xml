@@ -17,6 +17,17 @@
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<description></description>
+		<display-name>LogoutServlet</display-name>
+		<servlet-name>dss.project.servlet</servlet-name>
+		<servlet-class>dss.project.servlet.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dss.project.servlet</servlet-name>
+		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>itunes-jaas-realm</realm-name>
@@ -40,8 +51,21 @@
 		</auth-constraint>
 	</security-constraint>
 
-	
-	
+		<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>logout</web-resource-name>
+			<url-pattern>/logout.html</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>logout</web-resource-name>
+			<url-pattern>/login.html</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+
 	
 	<security-role>
 		<role-name>user</role-name>

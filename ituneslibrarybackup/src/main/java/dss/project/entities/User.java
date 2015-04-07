@@ -32,7 +32,7 @@ public class User {
 	
 	//relationship with playlists
 	@OneToMany
-	@JoinColumn(name = "library_persistent_id_user", referencedColumnName="library_persistent_id_user")
+	@JoinColumn(name = "library_persistent_id_playlist", referencedColumnName="library_persistent_id_user")
 	private Collection <Playlist> playlists;
 	
 

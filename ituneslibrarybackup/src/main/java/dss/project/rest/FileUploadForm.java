@@ -4,6 +4,8 @@ import javax.ws.rs.FormParam;
 
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
+import dss.project.utils.PasswordGenerator;
+
 public class FileUploadForm {
 
 	public FileUploadForm() {
@@ -42,6 +44,7 @@ public class FileUploadForm {
 	@FormParam("password")
 	@PartType("text/plain")
 	public void setPassword(String password){
+		
 		this.password = password;
 	}
 	
