@@ -11,4 +11,6 @@ public interface TrackService {
 	public Collection <Track> getTracks();
 	
 	public void addTracks(Collection <Track> tracks);
+	
+	public Collection <Track> getTracksForLibrary(String library);
 }

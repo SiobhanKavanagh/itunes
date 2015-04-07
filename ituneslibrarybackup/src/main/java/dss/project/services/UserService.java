@@ -10,4 +10,6 @@ public interface UserService {
 	public Collection <User> getAllUsers();
 	
 	public void insertUser(User user);
+	
+	public User getUser(String userId);
 	}

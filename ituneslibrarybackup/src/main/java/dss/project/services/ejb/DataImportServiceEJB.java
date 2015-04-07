@@ -110,8 +110,8 @@ public class DataImportServiceEJB implements DataImportService {
 						//System.out.println(name);
 					}
 					if(trackElements.item(j).getTextContent().equals("Artist")){
-						String album = trackElements.item(j +1).getTextContent();
-						t.setAlbum(album);
+						String artist = trackElements.item(j +1).getTextContent();
+						t.setArtist(artist);
 						//System.out.println(album);
 					}
 					if(trackElements.item(j).getTextContent().equals("Genre")){

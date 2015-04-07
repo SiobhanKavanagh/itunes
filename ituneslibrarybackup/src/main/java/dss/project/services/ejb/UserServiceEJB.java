@@ -33,6 +33,11 @@ public class UserServiceEJB implements UserService {
 	public void insertUser(User user) {
 		dao.insertUser(user);
 	}
+
+	@Override
+	public User getUser(String username) {
+		return dao.getUser(username);
+	}
  	
 
 }

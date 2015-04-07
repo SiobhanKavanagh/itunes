@@ -3,6 +3,7 @@ package dss.project.dao;
 import java.util.Collection;
 
 
+
 import dss.project.entities.Track;
 
 public interface TrackDAO {
@@ -15,6 +16,8 @@ public interface TrackDAO {
 	public void insertTrack(Track track);
 	
 	public void batchInsertTracks(Collection <Track> trackList);
+
+	public Collection<Track> getTracksForLibrary(String library);
 	
 	
 }

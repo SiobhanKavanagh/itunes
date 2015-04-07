@@ -43,5 +43,10 @@ public class JPATrackDAO implements TrackDAO {
 		}
 	}
 
+	@Override
+	public Collection<Track> getTracksForLibrary(String library) {
+		return (Collection<Track>) em.createNamedQuery("getTrackCountForLibrary").setParameter("libraryPersistentId", library).getSingleResult();
+	}
+
 
 }

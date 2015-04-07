@@ -33,6 +33,9 @@ public class TrackServiceEJB implements TrackService {
 		
 	}
 
-	
+	@Override
+	public Collection<Track> getTracksForLibrary(String library) {
+		return dao.getTracksForLibrary(library);
+	}
 
 }
