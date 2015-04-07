@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <title>Tracks</title>
 <script>
+<script type="text/javascript">
 
-function getAllTracks(){
+function getTracks(){
     var url = "rest/queries/getTracks";
     $.ajax({
             url : url,
@@ -35,5 +36,6 @@ function getAllTracks(){
 </script>
 </head>
 <body>
+<a id="getTracks" href="#" onclick="change('import');return false;">Tracks</a><br>
 </body>
 </html>
