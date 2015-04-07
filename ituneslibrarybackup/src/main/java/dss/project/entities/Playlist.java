@@ -27,14 +27,17 @@ public class Playlist {
 	private String playlistPersistentId;
 	@Column(length = 255, name = "playlist_name")
 	private String playlistName;
-	//FK of User
-	@Column(name = "library_persistent_id_playlist")
-	private String libraryPersistentIdTrackPlaylist;
 	
+	//relationship with user
+	@ManyToOne
+	@JoinColumn(name = "USER")
+	private User user;
+
 	//many to many relationship with track
 	@ManyToMany
-	@JoinTable(name = "playlist_has_track", joinColumns = @JoinColumn(name = "playlist_id", referencedColumnName = "playlist_id"),
-			inverseJoinColumns= @JoinColumn(name = "track_id", referencedColumnName = "track_id"))
+	@JoinTable(name = "playlist_track")
+	//@JoinTable(name = "playlist_has_track", joinColumns = {@JoinColumn(name = "playlist_id", referencedColumnName = "playlist_id")},
+	//		inverseJoinColumns= {@JoinColumn(name = "track_id", referencedColumnName = "track_id")})
 	private Collection <Track> tracks;
 	
 	
@@ -45,10 +48,10 @@ public class Playlist {
 		
 	}
 		
-	public Playlist(Integer playlistId, String playlistPersistentId, String libraryPersistentIdTrackPlaylist) {
+	public Playlist(Integer playlistId, String playlistPersistentId) {
 		this.playlistId = playlistId;
 		this.playlistPersistentId = playlistPersistentId;
-		this.libraryPersistentIdTrackPlaylist =  libraryPersistentIdTrackPlaylist;
+	
 	}
 
 	public Integer getPlaylistId() {

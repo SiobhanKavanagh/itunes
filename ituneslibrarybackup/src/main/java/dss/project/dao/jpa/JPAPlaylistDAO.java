@@ -22,8 +22,7 @@ public class JPAPlaylistDAO implements PlaylistDAO {
 	@Override
 	public Playlist getPlaylist(int playlistId, String playlistPersistentId,
 			String libraryPersistentIdTrackPlaylist) {
-		return em.find(Playlist.class, new Playlist(playlistId, playlistPersistentId,
-			libraryPersistentIdTrackPlaylist));
+		return em.find(Playlist.class, new Playlist(playlistId, playlistPersistentId));
 	}
 
 	@Override

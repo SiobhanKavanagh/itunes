@@ -36,5 +36,10 @@ public class JPAUserDAO implements UserDAO{
 		em.persist(user);
 	}
 	
+	//to delete a track
+	@Override
+	public void removeSingleTrack(Integer id) {
+		em.createQuery("delete from Track t where t.trackID=:id").setParameter("id", id).executeUpdate();
+	}
 
 }

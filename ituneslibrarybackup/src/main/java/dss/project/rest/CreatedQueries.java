@@ -44,4 +44,6 @@ public class CreatedQueries {
 	public Collection getPlaylists() {
 		return playlistService.getAllPlaylists();
 	}
+	
+
 }

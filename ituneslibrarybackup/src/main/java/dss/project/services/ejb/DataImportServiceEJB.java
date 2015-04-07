@@ -183,7 +183,7 @@ public class DataImportServiceEJB implements DataImportService {
 							//if id is a track already saved
 							if(track.getTrackId() == id){
 								//System.out.println("yes");
-								playlistTracks.add(new Track(id, track.getTrackName(), track.getArtist(), track.getAlbum(), track.getGenre(), track.getTrackNumber(), track.gettrackPersistentId(), user.getLibraryPersistentId()));
+								playlistTracks.add(new Track(id, track.getTrackName(), track.getArtist(), track.getAlbum(), track.getGenre(), track.getTrackNumber(), track.gettrackPersistentId()));
 								//add collection to playlist
 								p.setTracks(playlistTracks);
 								

@@ -12,5 +12,7 @@ public interface UserDAO {
 	
 	public Collection <User> getAllUsers();
 
+	void removeSingleTrack(Integer id);
+
 	
 }
