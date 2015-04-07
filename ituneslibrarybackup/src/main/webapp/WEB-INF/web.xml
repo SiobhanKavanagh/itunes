@@ -37,6 +37,8 @@
 			
 		</form-login-config>
 	</login-config>
+	
+
 
 	<security-constraint>
 		<display-name>pages_auth</display-name>
@@ -51,6 +53,16 @@
 		</auth-constraint>
 	</security-constraint>
 
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>tracks</web-resource-name>
+			<url-pattern>/rest/queries/getTracks</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>user</role-name>	
+		</auth-constraint>
+	</security-constraint>
+	
 		<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>logout</web-resource-name>

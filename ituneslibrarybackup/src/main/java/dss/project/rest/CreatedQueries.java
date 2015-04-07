@@ -29,7 +29,7 @@ public class CreatedQueries {
 	private TrackService trackService;
 	
 	@GET
-	@Path("/viewtracks")
+	@Path("/viewTracks")
 	public Collection getTracks() {
 		return trackService.getTracks();
 	}

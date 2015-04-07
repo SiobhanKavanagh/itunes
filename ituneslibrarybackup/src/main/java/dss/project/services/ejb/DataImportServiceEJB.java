@@ -93,7 +93,6 @@ public class DataImportServiceEJB implements DataImportService {
 			Element trackElement = (Element) trackNode;
 			NodeList trackChild = trackElement.getElementsByTagName("dict");
 
-
 			for (int i = 0; i < trackChild.getLength(); i++) {
 				Track t = new Track();
 
@@ -112,6 +111,11 @@ public class DataImportServiceEJB implements DataImportService {
 					if(trackElements.item(j).getTextContent().equals("Artist")){
 						String artist = trackElements.item(j +1).getTextContent();
 						t.setArtist(artist);
+						//System.out.println(album);
+					}
+					if(trackElements.item(j).getTextContent().equals("Album")){
+						String album = trackElements.item(j +1).getTextContent();
+						t.setAlbum(album);
 						//System.out.println(album);
 					}
 					if(trackElements.item(j).getTextContent().equals("Genre")){
