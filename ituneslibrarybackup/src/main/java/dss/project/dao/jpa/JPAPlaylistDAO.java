@@ -15,8 +15,8 @@ public class JPAPlaylistDAO implements PlaylistDAO {
 	private EntityManager em;
 	
 	@Override
-	public Collection<Playlist> getallPlaylists() {
-		return em.createNamedQuery("findAllPlaylists").getResultList();
+	public Collection<Playlist> getAllPlaylists() {
+		return em.createNamedQuery("getAllPlaylists").getResultList();
 	}
 
 	@Override

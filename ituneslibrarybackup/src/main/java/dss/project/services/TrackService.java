@@ -8,7 +8,7 @@ import dss.project.entities.Track;
 @Local
 public interface TrackService {
 	
-	public Collection <Track> getTracks();
+	public Collection <Track> getAllTracks();
 	
 	public void addTracks(Collection <Track> tracks);
 	

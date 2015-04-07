@@ -23,8 +23,8 @@ public class PlaylistServiceEJB implements PlaylistService {
 	private PlaylistDAO dao;
 
 	@Override
-	public Collection<Playlist> getPlaylists() {
-		return dao.getallPlaylists();
+	public Collection<Playlist> getAllPlaylists() {
+		return dao.getAllPlaylists();
 	}
 
 	@Override

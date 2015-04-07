@@ -7,7 +7,7 @@ import dss.project.entities.Track;
 
 public interface PlaylistDAO {
 
-	public Collection <Playlist> getallPlaylists();
+	public Collection <Playlist> getAllPlaylists();
 	
 	public Playlist getPlaylist(int playlistId, String playlistPersistentId, String libraryPersistentIdTrackPlaylist);
 

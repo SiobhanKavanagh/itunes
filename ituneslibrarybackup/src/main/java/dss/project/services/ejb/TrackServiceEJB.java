@@ -23,7 +23,7 @@ public class TrackServiceEJB implements TrackService {
 	private TrackDAO dao;
 	
 	@Override
-	public Collection<Track> getTracks() {
+	public Collection<Track> getAllTracks() {
 			return dao.getAllTracks();
 	}
 

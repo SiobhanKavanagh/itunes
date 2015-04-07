@@ -56,7 +56,17 @@
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>tracks</web-resource-name>
-			<url-pattern>/rest/queries/getTracks</url-pattern>
+			<url-pattern>/rest/query/getTracks</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>user</role-name>	
+		</auth-constraint>
+	</security-constraint>
+	
+		<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>playlists</web-resource-name>
+			<url-pattern>/rest/query/getPlaylists</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>user</role-name>	

@@ -1,33 +1,59 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+<meta charset="UTF-8">
 <title>Itunes Home</title>
 <button type="button" onclick="window.location.replace('LogoutServlet')">Logout</button>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
 
  	var locate = window.location;
- 	//document.test.test2.value = locate;
- 	//var text = document.test.test2.value;
  	
+ 	
+ 	//get tracks
  	function getTracks(){
- 	    var url = "rest/queries/getTracks";
- 	    alert("hello");
+ 	    var url = 'rest/query/getTracks';
  	    $.ajax({
  	            url : url,
  	            type : 'POST',
- 	            contentType : "application/json",
+ 	           contentType : "application/json",
  	            dataType : "json",
- 	            success: function(data) {
+ 	              success: function(data) {
  	                    var text = "All tracks<br><br>";
  	                    if (data.length == 0) {
  	                            text = "<b> No results for tracks</b><br>";
  	                    }
  	                    for (var i = 0; i < data.length; i++) {
  	                            var obj = data[i];
- 	                            var printable = "Track ID: "+ obj.trackId + "<br>Name: "+ obj.name +"<br>Artist: "+ obj.artist + "<br>Album: "+ obj.album +"<br>Genre: "+ obj.genre +"<br><br>";
+ 	                            var printable = "Track ID: "+ obj.trackId + "<br>Name: "+ obj.trackName +"<br>Artist: "+ obj.artist + "<br>Album: "+ obj.album +"<br>Genre: "+ obj.genre +"<br><br>";
+ 	                            text = text + printable;
+ 	                           
+ 	                    }
+ 	                   document.getElementById("jsChangeArea").innerHTML = text;
+ 	                   
+ 	            }
+ 	           
+ 	    });
+ 	}
+ 	
+ 	//get playlists
+ 	function getPlaylists(){
+ 	    var url = 'rest/query/getPlaylists';
+ 	    $.ajax({
+ 	            url : url,
+ 	            type : 'POST',
+ 	           contentType : "application/json",
+ 	            dataType : "json",
+ 	              success: function(data) {
+ 	                    var text = "All playlists<br><br>";
+ 	                    if (data.length == 0) {
+ 	                            text = "<b> No results for playlists</b><br>";
+ 	                    }
+ 	                    for (var i = 0; i < data.length; i++) {
+ 	                            var obj = data[i];
+ 	                            var printable = "Playlist ID: "+ obj.playlistId + "<br>Name: "+ obj.playlistName +"<br><br>";
  	                            text = text + printable;
  	                           
  	                    }
@@ -45,10 +71,12 @@
 			var text = document.getElementById("jsChangeArea");
 			getTracks();
 			
-		} 
-		else {
-			alert("No");
-		}
+			} 
+		//if (selection == 'playlists') {
+		//	var text = document.getElementById("jsChangeArea");
+		//	getPlaylists();
+		//	}
+		
 		}
 		
  

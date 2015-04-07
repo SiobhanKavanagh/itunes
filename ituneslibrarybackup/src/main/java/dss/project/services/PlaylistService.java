@@ -10,7 +10,7 @@ import dss.project.entities.Track;
 @Local
 public interface PlaylistService {
 
-	public Collection <Playlist> getPlaylists();
+	public Collection <Playlist> getAllPlaylists();
 	
 	public void addPlaylists(Collection <Playlist> playlists);
 }
